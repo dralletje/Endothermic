@@ -13,24 +13,34 @@ A small util to bind react components to firebase listeners, because reactfire i
 $ npm install --save endothermic
 ```
 
-I recommend making a extra file that initializes endothermic with your firebase root and exports the ref and the decorator (e.g. `./firebase.js`)
+Now, recommended at the top component of you app, you wrap it in a `<Provider />` tag
 
 ```javascript
 import Firebase from 'firebase'
-import endothermic from 'endothermic'
+import {Provider} from 'endothermic'
+import React from 'react'
+
+import MyComponent from './MyComponent'
 
 let FIREBASE_URL = '...'
-let baseref = new Firebase(FIREBASE_URL)
+let firebase = new Firebase(FIREBASE_URL)
 
-export default baseref
-export let connect = endothermic(baseref)
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider firebase={firebase} />
+        <MyComponent />
+      </Provider>
+    )
+  }
+}
 ```
 
 Now, in the files with the component you want to connect to firebase, you can do
 
 ```javascript
 import React from 'react'
-import firebase, {connect} from './firebase.js'
+import {connect} from 'endothermic'
 
 @connect({
   name: 'users/jake/fullname'
@@ -48,6 +58,6 @@ See [API](API.md)
 
 ## Yet to come
 
-- Provider like syntax
+- ~~Provider like syntax~~ In version 2!
 - React-redux like second argument with side effects
 - Support for more advanced firebase queries
