@@ -1,14 +1,5 @@
 ## API
 
-<!---
-For the ones that like flow/haskell/whatever type signatures, I'll have a try:
-```
-type Endothermic = (rootref: Firebase) =>
-  (mapPropsToPaths: Object | Function) =>
-    (component: React.Component) => Component
-```
---->
-
 ### `<Provider firebase />`
 
 <!--- Yessss, took this from react-redux too 😂 --->
