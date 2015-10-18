@@ -1,4 +1,5 @@
 import React from 'react'
+import firebaseShape from './firebaseShape'
 
 /*************/
 /*  HELPERS  */
@@ -39,6 +40,12 @@ const massUnbind = (keys, listeners) => {
   keys.forEach(key => listeners[key]())
 }
 
+const ensureCallable = maybeFn =>
+  typeof maybeFn === 'function' ? maybeFn : (_ => maybeFn)
+
+const getDisplayName = WrappedComponent =>
+  WrappedComponent.displayName || WrappedComponent.name || 'Component';
+
 /***************/
 /*  COMPONENT  */
 /***************/
@@ -47,28 +54,34 @@ const massUnbind = (keys, listeners) => {
 const initial = Symbol('Initial value')
 
 
-export default baseref => dataOrFn => Component => {
-  const linkFn = typeof dataOrFn === 'function' ? dataOrFn : (_ => dataOrFn)
+export default (dataOrFn = {}) => WrappedComponent => {
+  const linkFn = ensureCallable(dataOrFn)
 
   const getPaths = props =>
     props.endothermicLoaded === false
     ? {}
     : linkFn(props)
 
-  const listen = update => (path, key) =>
-    onValue(baseref.child(path), value => {
-      update(key, value)
-    })
-
   return class Endothermic extends React.Component {
-    static displayName = `Endothermic(${Component.displayName || Component.name})`
+    static displayName = `Endothermic(${getDisplayName(WrappedComponent)})`
+    static WrappedComponent = WrappedComponent
+    static contextTypes = {
+      firebase: firebaseShape,
+    }
+    static propTypes = {
+      firebase: firebaseShape,
+    }
 
-    constructor(props) {
-      super(props)
+    constructor(props, context) {
+      super(props, context)
 
-      this.listen = listen( (key, value) => {
-        this.setState({ [key]: value })
-      })
+      this.firebase = props.firebase || context.firebase;
+
+      this.listen = (path, key) =>
+        onValue(this.firebase.child(path), value => {
+          this.setState({ [key]: value })
+        })
+
       this.listeners = {}
       this.paths = getPaths(this.props)
       this.state = mapObject(this.paths, _ => initial)
@@ -118,9 +131,10 @@ export default baseref => dataOrFn => Component => {
         .every( ([key, value]) => value !== initial)
 
       return (
-        <Component
+        <WrappedComponent
           {...this.props}
           {...this.state}
+          firebase={this.firebase}
           endothermicLoaded={loaded}
         />
       )
