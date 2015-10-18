@@ -9,17 +9,18 @@ type Endothermic = (rootref: Firebase) =>
 ```
 --->
 
-### `endothermic(firebase_ref)`
+### `<Provider firebase />`
 
-Returns decorator that uses `firebase_ref` as base ref, i.e. it will use `firebase_ref.child(path)` to get child nodes. Libraries like react-redux use a `<Provider />` component for that. I should do that too, I think, but I just didn't dig deep enough into it yet.
+<!--- Yessss, took this from react-redux too 😂 --->
 
-#### Arguments
+Makes the firebase ref available to the connect() calls in the component hierarchy below. Normally, you can’t use connect() without wrapping the root component in <Provider>.
 
-- `firebase_ref` (*Object*) Firebase ref instance to use as root
+If you really need to, you can manually pass firebase as a prop to every connect()ed component, but we only recommend to do this for stubbing store in unit tests, or in non-fully-React codebases. Normally, you should just use <Provider>.
 
-#### Returns
+#### Props
+- `store` (*Firebase ref*): The root firebase ref that your app uses
+- `children` (ReactElement) The root of your component hierarchy.
 
-Decorator as described below (connect) 😉
 
 
 ### `connect(mapPropsToPaths)`

@@ -1,1 +1,4 @@
-module.exports = require('./build/exothermic')
+module.exports = {
+  connect: require('./build/connect'),
+  Provider: require('./build/Provider'),
+}
