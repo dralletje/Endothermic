@@ -1,6 +1,6 @@
 {
   "name": "endothermic",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Link up react components with firebase",
   "main": "index.js",
   "dependencies": {},
