@@ -1,5 +1,6 @@
 import React from 'react'
 import firebaseShape from './firebaseShape'
+import Symbol from 'es6-symbol'
 
 /*************/
 /*  HELPERS  */

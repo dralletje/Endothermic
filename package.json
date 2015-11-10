@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "description": "Link up react components with firebase",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "es6-symbol": "^3.0.1"
+  },
   "devDependencies": {
     "babel-eslint": "^4.1.3",
     "eslint-plugin-react": "^3.5.1",
