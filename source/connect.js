@@ -104,16 +104,16 @@ export default (dataOrFn = {}) => WrappedComponent => {
       // Unbind all listeners that no longer match
       massUnbind(removed, listeners)
 
-      // Start listening on the new ones
-      const newListeners = asObject(
-        added.map( key => [key, this.listen(newPaths[key], key)] )
-      )
-
       Object.assign(this, {
         paths: newPaths,
         listeners: Object.assign({}, listeners, newListeners),
       })
-      this.setState(mapObject(newListeners, _ => initial))
+      this.setState(asObject(added.map(x => [x, initial])))
+
+      // Start listening on the new ones
+      const newListeners = asObject(
+        added.map( key => [key, this.listen(newPaths[key], key)] )
+      )
     }
 
     /**
