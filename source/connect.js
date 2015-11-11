@@ -91,7 +91,7 @@ export default (dataOrFn = {}) => WrappedComponent => {
     /**
      * Actually listen to the events
      */
-    componentWillMount() {
+    componentDidMount() {
       this.listeners = mapObject(this.paths, this.listen)
     }
 
