@@ -1,7 +1,7 @@
 {
   "name": "endothermic",
   "version": "2.0.3",
-  "description": "Link up react components with firebase",
+  "description": "Create React Components with Firebase bindings w/ ES7 Syntax",
   "main": "index.js",
   "dependencies": {
     "es6-symbol": "^3.0.1"
