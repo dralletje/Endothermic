@@ -38,7 +38,7 @@ const onValue = (ref, fn) =>
 
 // Just easy for me
 const massUnbind = (keys, listeners) => {
-  keys.forEach(key => listeners[key]())
+  keys.forEach(key => listeners[key] && listeners[key]())
 }
 
 const ensureCallable = maybeFn =>
