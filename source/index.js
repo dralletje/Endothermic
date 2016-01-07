@@ -1,2 +1,2 @@
-export connect from './build/connect'
-export Provider from './build/Provider'
+export connect from './connect'
+export Provider from './Provider'
