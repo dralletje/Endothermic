@@ -1,6 +1,6 @@
 {
   "name": "endothermic",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "Create React Components with Firebase bindings w/ ES7 Syntax",
   "main": "index.js",
   "dependencies": {
