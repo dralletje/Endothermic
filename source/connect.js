@@ -115,7 +115,10 @@ export default (dataOrFn = {}) => WrappedComponent => {
         added.map( key => [key, this.listen(newPaths[key], key)] )
       )
 
-      this.listeners = newListeners
+      this.listeners = {
+        ...this.listeners,
+        ...newListeners,
+      }
     }
 
     /**
