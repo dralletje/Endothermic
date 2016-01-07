@@ -64,14 +64,14 @@ export default (dataOrFn = {}) => WrappedComponent => {
     : linkFn(props)
 
   return class Endothermic extends React.Component {
-    static displayName = `Endothermic(${getDisplayName(WrappedComponent)})`
-    static WrappedComponent = WrappedComponent
+    static displayName = `Endothermic(${getDisplayName(WrappedComponent)})`;
+    static WrappedComponent = WrappedComponent;
     static contextTypes = {
       firebase: firebaseShape,
-    }
+    };
     static propTypes = {
       firebase: firebaseShape,
-    }
+    };
 
     constructor(props, context) {
       super(props, context)
