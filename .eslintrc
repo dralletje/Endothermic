@@ -49,7 +49,6 @@
   "rules": {
     "prefer-arrow-callback": 1,
     "prefer-spread": 1,
-    "prefer-const": 1,
 
     // disallow trailing commas in object literals
     "comma-dangle": [2, "always-multiline"],

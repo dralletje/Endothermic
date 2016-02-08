@@ -1,2 +1,5 @@
 export connect from './connect'
 export Provider from './Provider'
+export driver from './driver'
+export firebaseAdapter from './firebaseAdapter'
+export graphql from './graphql'

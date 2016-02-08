@@ -1,27 +1,14 @@
-import {Component, PropTypes, Children} from 'react';
-import firebaseShape from './firebaseShape'
+import {PropTypes} from 'react';
+import driverShape from './driverShape'
+import {withContext, compose, setPropTypes} from 'recompose'
 
-export default class Provider extends Component {
-  static propTypes = {
-    firebase: firebaseShape.isRequired,
-    children: PropTypes.element.isRequired,
-  }
-
-  static childContextTypes = {
-    firebase: firebaseShape.isRequired,
-  }
-
-  getChildContext() {
-    return {firebase: this.firebase};
-  }
-
-  constructor(props, context) {
-    super(props, context);
-    this.firebase = props.firebase;
-  }
-
-  render() {
-    const {children} = this.props;
-    return Children.only(children);
-  }
-}
+export default compose(
+  setPropTypes({
+    driver: driverShape.isRequired,
+    children: PropTypes.node.isRequired,
+  })
+,
+  withContext({
+    endothermicDriver: driverShape.isRequired,
+  }, props => ({ endothermicDriver: props.driver }))
+)(props => props.children)
